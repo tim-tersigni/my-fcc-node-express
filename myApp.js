@@ -8,7 +8,7 @@ var app = express();
 
 
 /** 1) Meet the node console. */
-console.log("Hello World");
+// console.log("Hello World");
 
 
 /** 2) A first working Express Server */
@@ -17,13 +17,13 @@ console.log("Hello World");
 // })
 
 /** 3) Serve an HTML file */
-var path = require('path');
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "index.html"));
-})
+// var path = require('path');
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, "views", "index.html"));
+// })
 
 /** 4) Serve static assets  */
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
 
 /** 5) serve JSON on a specific route */
 // app.get('/json', (req, res) => {
@@ -31,19 +31,22 @@ app.use(express.static(path.join(__dirname, "public")));
 // })
 
 /** 6) Use the .env file to configure the app */
-require('dotenv').config()
-console.log(process.env.MESSAGE_STYLE);
-app.get('/json', (req, res) => {
-  if (process.env.MESSAGE_STYLE === "uppercase") {
-    res.json({ "message": "HELLO JSON" });
-  } else {
-    res.json({ "message": "Hello json" });
-  }
-})
+// require('dotenv').config()
+// console.log(process.env.MESSAGE_STYLE);
+// app.get('/json', (req, res) => {
+//   if (process.env.MESSAGE_STYLE === "uppercase") {
+//     res.json({ "message": "HELLO JSON" });
+//   } else {
+//     res.json({ "message": "Hello json" });
+//   }
+// })
  
 /** 7) Root-level Middleware - A logger */
 //  place it before all the routes !
-
+app.use((req, res, next) => {
+  console.log(`${ req.method } ${ req.path } - ${ req.ip }\n`);
+  next();
+})
 
 /** 8) Chaining middleware. A Time server */
 
