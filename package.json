@@ -10,7 +10,7 @@
 	},
 	"main": "server.js",
 	"scripts": {
-		"start": "node server.js",
+		"start": "node --use-strict server.js",
 		"dev": "nodemon server.js"
 	},
 	"engines": {
